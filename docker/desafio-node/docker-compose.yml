@@ -1,0 +1,55 @@
+version: '3.4'
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: .docker/node/Dockerfile
+    networks:
+      - nodenet
+    tty: true
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: .docker/nginx/Dockerfile
+    restart: always
+    networks:
+      - nodenet
+    ports:
+      - 8080:80
+    depends_on:
+      - app
+
+  db:
+    image: mysql:5.7
+    container_name: db
+    restart: always
+    tty: true
+    networks:
+      - nodenet
+    volumes:
+      - .docker/mysql/var:/var/lib/mysql
+    command: --innodb-use-native-aio=0
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    environment:
+      - MYSQL_DATABASE=nodedb
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=root
+volumes:
+  node_modules:
+networks:
+  nodenet:
+    driver: bridge
