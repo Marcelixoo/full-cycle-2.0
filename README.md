@@ -19,7 +19,7 @@ Está aplicação deverá mostrar na tela a mensagem "Code.education Rocks!" qua
 O código-fonte da aplicação está disponível em [docker/desafio-go](docker/desafio-go/app.go).
 
 ### Aplicação Node
-Está aplicação deverá listar a mensagem <h1>Full Cycle Rocks!</h1> juntamente com a listagem de nomes cadastrados no banco de dados. Para iniciá-la, basta rodar o comando a seguir:
+Está aplicação deverá listar a mensagem "Full Cycle Rocks!" juntamente com a listagem de nomes cadastrados no banco de dados. Para iniciá-la, basta rodar o comando a seguir:
 
 ```bash
     npm run serve
