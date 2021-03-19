@@ -3,7 +3,6 @@
 Este repositório contêm o código-fonte dos desafios propostos durante o curso Full Cycle 2.0.
 
 ## Docker
------
 
 O primeiro módulo apresenta dois desafios.
 
