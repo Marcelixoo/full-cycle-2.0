@@ -12,10 +12,9 @@ services:
       - 3000:3000
     volumes:
       - .:/app
-      - node_modules:/app/node_modules
+      - /app/node_modules
     depends_on:
-      db:
-        condition: service_healthy
+      - db
 
   nginx:
     container_name: nginx
@@ -47,7 +46,7 @@ services:
     environment:
       - MYSQL_DATABASE=nodedb
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_USER=root
+
 volumes:
   node_modules:
 networks:
